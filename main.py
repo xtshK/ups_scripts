@@ -20,7 +20,9 @@ output_dir = "ups_logs"
 os.makedirs(output_dir, exist_ok=True)
 
 all_dfs = []
-target_date = datetime.today().strftime("%Y%m%d")  # 例如 "20250611"
+target_date = datetime.today().strftime("%Y%m%d")
+
+# 例如 "20250611"
 
 for ups in ups_targets:
     ups_name = ups["name"]
