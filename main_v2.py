@@ -20,7 +20,6 @@ output_dir = "ups_logs"
 os.makedirs(output_dir, exist_ok=True)
 
 target_date = datetime.today().strftime("%Y%m%d")
-target_date = "20250613"
 
 for ups in ups_targets:
     ups_name = ups["name"]
