@@ -83,3 +83,4 @@ for ups in ups_targets:
             print(f"⚠️  轉換失敗：{e}")
     else:
         print(f"❌ {ups_name} 下載失敗：狀態碼 {response.status_code}")
+# 
