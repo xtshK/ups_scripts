@@ -17,6 +17,9 @@ ups_targets = [
 username = "admin"
 password = "misadmin"
 output_dir = "ups_logs"
+
+onelake_path = r"C:\Users\kuose\OneLake - Microsoft\global-IT-DEV\selena_lakehouse.Lakehouse\Files"
+output_dir = os.path.join(onelake_path, "ups_data_all")
 os.makedirs(output_dir, exist_ok=True)
 
 target_date = datetime.today().strftime("%Y%m%d")
