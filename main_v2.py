@@ -70,10 +70,12 @@ for ups in ups_targets:
             # ⬇️ 儲存為 combined 檔案（防重複）
             combined_path = f"{output_dir}/{ups_name}.csv"
             if os.path.exists(combined_path):
+                # 如果已存在，讀取並合併
                 existing = pd.read_csv(combined_path)
                 combined = pd.concat([existing, df], ignore_index=True)
                 combined.drop_duplicates(subset=["Date", "Time", "UPS_Name"], inplace=True)
             else:
+                # 如果不存在，直接使用當前 DataFrame
                 combined = df
 
             combined.to_csv(combined_path, index=False)
