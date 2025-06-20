@@ -24,7 +24,7 @@ input_date = input("請輸入日期 (格式: yyyymmdd)：")
 try:
     date_obj = datetime.strptime(input_date, "%Y%m%d")
     target_date = date_obj.strftime("%Y%m%d")
-    target_date = "20250611"
+    target_date = input_date  # 直接使用輸入的日期
 
 except ValueError:
     print("❌ 日期格式錯誤，請輸入正確格式：yyyymmdd")
@@ -76,7 +76,7 @@ for ups in ups_targets:
             df["Date"] = pd.to_datetime(df["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
 
             # ✅ 寫入 combined 檔案（自動去除重複）
-            combined_path = f"{output_dir}/{ups_name}_combine.csv"
+            combined_path = f"{output_dir}/{ups_name}.csv"
             if os.path.exists(combined_path):
                 existing = pd.read_csv(combined_path)
                 combined = pd.concat([existing, df], ignore_index=True)
