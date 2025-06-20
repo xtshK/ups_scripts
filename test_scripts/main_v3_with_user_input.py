@@ -20,14 +20,14 @@ output_dir = "ups_logs"
 os.makedirs(output_dir, exist_ok=True)
 
 # 🗓️ 使用者輸入日期（格式 yyyy/mm/dd）
-input_date = input("請輸入日期 (格式: yyyy/mm/dd)：")
+input_date = input("請輸入日期 (格式: yyyymmdd)：")
 try:
-    date_obj = datetime.strptime(input_date, "%Y/%m/%d")
+    date_obj = datetime.strptime(input_date, "%Y%m%d")
     target_date = date_obj.strftime("%Y%m%d")
     target_date = "20250611"
 
 except ValueError:
-    print("❌ 日期格式錯誤，請輸入正確格式：yyyy/mm/dd")
+    print("❌ 日期格式錯誤，請輸入正確格式：yyyymmdd")
     exit()
 
 for ups in ups_targets:
