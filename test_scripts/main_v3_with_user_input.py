@@ -73,7 +73,7 @@ for ups in ups_targets:
                 df = df[["Date", "Time", "Vin", "Vout", "Vbat", "Fin", "Fout", "Load", "Temp"]]
 
             df["UPS_Name"] = ups_name
-            df["Date"] = pd.to_datetime(df["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
+            df["Date"] = pd.to_datetime(df["Date"], errors="coerce").dt.strftime("%Y/%m/%d")
 
             # ✅ 寫入 combined 檔案（自動去除重複）
             combined_path = f"{output_dir}/{ups_name}.csv"
