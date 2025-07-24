@@ -40,7 +40,7 @@ for ups in ups_targets:
         session.auth = HTTPBasicAuth(username, password)
         session.get(f"http://{ip}/refresh_data.cgi", params="data_date=" + target_date)
         url = f"http://{ip}/download.cgi"
-        form_data = {"$data_date": target_date}
+        form_data = {"data_date": target_date}
 
     headers = {
         "User-Agent": "Mozilla/5.0",
@@ -57,6 +57,8 @@ for ups in ups_targets:
             # 欄位標準化
             if ups_type == "standard":
                 df.columns = ["Date", "Time", "Vin", "Vout", "Vbat", "Fin", "Fout", "Load", "Temp"]
+                df["UPS_Name"] = ups_name
+                df["Date"] = pd.to_datetime(df["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
             else:
                 df.columns = ["DateTime", "Vin", "Vout", "Freq", "Load", "Capacity", "Vbat", "CellVolt", "Temp"]
                 df = df.dropna(subset=["DateTime"])
@@ -66,9 +68,8 @@ for ups in ups_targets:
                 df["Fout"] = df["Freq"]
                 df["Temp"] = df["Temp"].str.extract(r"([\d\.]+)").astype(float)
                 df = df[["Date", "Time", "Vin", "Vout", "Vbat", "Fin", "Fout", "Load", "Temp"]]
-
-            df["UPS_Name"] = ups_name
-            df["Date"] = pd.to_datetime(df["Date"], errors="coerce").dt.strftime("%Y/%m/%d")
+                df["UPS_Name"] = ups_name
+                df["Date"] = pd.to_datetime(df["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
 
             # ⬇️ 儲存為 combined 檔案（防重複）
             combined_path = f"{output_dir}/{ups_name}.csv"
